@@ -1,0 +1,69 @@
+" ウィンドウ最大化
+au GUIEnter * simalt ~x
+
+colorscheme hybrid
+
+" 透明度を指定
+set transparency=30 
+
+" アンチエイリアスの設定
+set antialias
+
+" シンタックスハイライト
+syntax on
+
+" ファイルエンコード
+set fileencoding=utf-8
+set encoding=utf-8
+
+" 行番号を表示
+set number
+
+" 対応括弧に<と>のペアを追加
+set matchpairs& matchpairs+=<:>
+
+" 対応括弧をハイライト表示する
+set showmatch
+
+" 対応括弧の表示秒数を3秒にする
+set matchtime=3
+
+" インクリメンタルサーチを行う
+set incsearch
+
+" 検索結果をハイライト表示
+:set hlsearch
+
+" タブ幅の設定
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
+" フォント指定
+set guifont=Consolas:h10,Lucida_Console:h10:w5 guifontwide=MS_Gothic:h10
+set ambiwidth=double
+
+" メニューの文字化け対応
+source $VIMRUNTIME/delmenu.vim
+set langmenu=ja_jp.utf-8
+source $VIMRUNTIME/menu.vim
+
+" ウィンドウ位置を保存
+let g:save_window_file = expand('~/.vimwinpos')
+augroup SaveWindow
+  autocmd!
+  autocmd VimLeavePre * call s:save_window()
+  function! s:save_window()
+    let options = [
+      \ 'set columns=' . &columns,
+      \ 'set lines=' . &lines,
+      \ 'winpos ' . getwinposx() . ' ' . getwinposy(),
+      \ ]
+    call writefile(options, g:save_window_file)
+  endfunction
+augroup END
+
+if filereadable(g:save_window_file)
+  execute 'source' g:save_window_file
+endif
