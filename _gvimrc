@@ -5,9 +5,6 @@ endif
 
 colorscheme hybrid
 
-" 透明度を指定
-set transparency=30 
-
 " アンチエイリアスの設定
 set antialias
 
