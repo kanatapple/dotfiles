@@ -108,9 +108,10 @@ nnoremap subp y:OverCommandLine<CR>%s!<C-r>=substitute(@0, '!', '\\!', 'g')<CR>!
 " vimshell setting
 let g:vimshell_interactive_update_time = 10
 let g:vimshell_prompt = $USERNAME."% "
+let g:vimshell_user_prompt = 'getcwd()'
 
 " vimshell map
-nnoremap <silent> vs :VimShell<CR>
+nnoremap <silent> vs :sp<cr><c-w><c-w>:VimShell<CR>
 nnoremap <silent> vsc :VimShellCreate<CR>
 nnoremap <silent> vp :VimShellPop<CR>
 
