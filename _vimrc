@@ -16,6 +16,9 @@ NeoBundle 'L9'
 NeoBundle 'FuzzyFinder'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/vimshell.git'
+NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/unite.vim'
 NeoBundle 'surround.vim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/syntastic'
@@ -89,8 +92,27 @@ let g:syntastic_mode_map = { 'mode': 'passive',
             \ 'passive_filetypes': [] }
 " }}}"
 
-" キーバインド
+"" over.vim {{{
 
+" over.vimの起動
+nnoremap <silent> ,m :OverCommandLine<CR>
+
+" カーソル下の単語をハイライト付きで置換
+nnoremap sub :OverCommandLine<CR>%s/<C-r><C-w>//g<Left><Left>
+
+" コピーした文字列をハイライト付きで置換
+nnoremap subp y:OverCommandLine<CR>%s!<C-r>=substitute(@0, '!', '\\!', 'g')<CR>!!gI<Left><Left><Left>
+
+" }}}
+
+" vimshell setting
+let g:vimshell_interactive_update_time = 10
+let g:vimshell_prompt = $USERNAME."% "
+
+" vimshell map
+nnoremap <silent> vs :VimShell<CR>
+nnoremap <silent> vsc :VimShellCreate<CR>
+nnoremap <silent> vp :VimShellPop<CR>
 
 " バックアップファイルを作成しない
 :set nobackup
