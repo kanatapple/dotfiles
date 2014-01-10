@@ -1,5 +1,7 @@
-" ウィンドウ最大化
-au GUIEnter * simalt ~x
+if has('win32') || has('win64')
+	" ウィンドウ最大化
+	au GUIEnter * simalt ~x
+endif
 
 colorscheme hybrid
 
