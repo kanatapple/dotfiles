@@ -20,6 +20,9 @@ NeoBundle 'surround.vim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'vim-startify'
+NeoBundle 'The-NERD-Commenter'
+NeoBundle 'osyo-manga/vim-over'
+NeoBundle 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 
 "ファイル形式別プラグインのロードを有効化
 filetype plugin on
@@ -44,6 +47,11 @@ nnoremap fm :FufMruFile<CR>
 nnoremap fr :FufRenewCache<CR>
 nnoremap ft :FufTagWithCursorWord<CR>
 nnoremap fw :FufFileWithCurrentBufferDir<CR>
+let g:fuf_infoFile = '~/.vim/fuf/info'
+let g:fuf_tag_cache_dir = '~/.vim/fuf/cache/tag'
+let g:fuf_taggedfile_cache_dir = '~/.vim/fuf/cache/taggedfile'
+let g:fuf_help_cache_dir = '~/.vim/fuf/cache/help'
+let g:fuf_mrufile_maxItem = 100
 
 " neocomplcache
 " 起動時に有効
@@ -58,46 +66,6 @@ inoremap <expr><C-e>  neocomplcache#close_popup()
 "オムニ補完の手動呼び出し.
 inoremap <expr><C-Space> neocomplcache#start_manual_complete()
 
-" タブ関連
-function! GuiTabLabel()
-  " タブで表示する文字列の初期化をします
-  let l:label = ''
-
-  " タブに含まれるバッファ(ウィンドウ)についての情報をとっておきます。
-  let l:bufnrlist = tabpagebuflist(v:lnum)
-
-  " 表示文字列にバッファ名を追加します
-  " パスを全部表示させると長いのでファイル名だけを使います 詳しくは help fnamemodify()
-  let l:bufname = fnamemodify(bufname(l:bufnrlist[tabpagewinnr(v:lnum) - 1]), ':t')
-  " バッファ名がなければ No title としておきます。ここではマルチバイト文字を使わないほうが無難です
-  let l:label .= l:bufname == '' ? 'No title' : l:bufname
-
-  " タブ内にウィンドウが複数あるときにはその数を追加します(デフォルトで一応あるので)
-  let l:wincount = tabpagewinnr(v:lnum, '$')
-  if l:wincount > 1
-    let l:label .= '[' . l:wincount . ']'
-  endif
-
-  " このタブページに変更のあるバッファがるときには '[+]' を追加します(デフォルトで一応あるので)
-  for bufnr in l:bufnrlist
-    if getbufvar(bufnr, "&modified")
-      let l:label .= '[+]'
-      break
-    endif
-  endfor
-
-  " 表示文字列を返します
-  return l:label
-endfunction
-
-" guitablabel に上の関数を設定します
-" その表示の前に %N というところでタブ番号を表示させています
-set guitablabel=%N:\ %{GuiTabLabel()}
-nnoremap t :tabnew<CR>
-for n in range(1, 9)
-    exe 'nnoremap ' . n . 't :<C-u>tabnext ' . n . '<CR>'
-endfor
-
 " NERD Tree
 nmap <F9> :NERDTreeToggle<CR>
 
@@ -107,10 +75,21 @@ let g:startify_custom_indices = ['f', 'g', 'h', 'r', 'i', 'o', 'b']
 " よく使うファイルをブックマークとして登録しておく
 let g:startify_bookmarks = ['~/.vimrc', '~/localrepos/blog/vac_20131215.md']
 
+" NERD Commenter
+" コメントした後に挿入するスペースの数
+let NERDSpaceDelims = 1
+" キーマップの変更。<Leader>=\+cでコメント化と解除を行う。
+" コメントされていれば、コメントを外し、コメントされてなければコメント化する。
+nmap ,, <Plug>NERDCommenterToggle
+vmap ,, <Plug>NERDCommenterToggle
+
+" syntastic "{{{
+let g:syntastic_mode_map = { 'mode': 'passive',
+            \ 'active_filetypes': ['javascript'],
+            \ 'passive_filetypes': [] }
+" }}}"
 
 " キーバインド
-" 挿入モード時、クリップボードから貼り付け
-nmap P <ESC>"*pa
 
 
 " バックアップファイルを作成しない
