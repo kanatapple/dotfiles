@@ -1,54 +1,55 @@
 if has('win32') || has('win64')
-	" ƒEƒBƒ“ƒhƒEÅ‘å‰»
+	" ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦æœ€å¤§åŒ–
 	au GUIEnter * simalt ~x
 endif
 
 colorscheme hybrid
 
-" ƒAƒ“ƒ`ƒGƒCƒŠƒAƒX‚Ìİ’è
+" ã‚¢ãƒ³ãƒã‚¨ã‚¤ãƒªã‚¢ã‚¹ã®è¨­å®š
 set antialias
 
-" ƒVƒ“ƒ^ƒbƒNƒXƒnƒCƒ‰ƒCƒg
+" ã‚·ãƒ³ã‚¿ãƒƒã‚¯ã‚¹ãƒã‚¤ãƒ©ã‚¤ãƒˆ
 syntax on
 
-" ƒtƒ@ƒCƒ‹ƒGƒ“ƒR[ƒh
+" ãƒ•ã‚¡ã‚¤ãƒ«ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰
 set fileencoding=utf-8
 set encoding=utf-8
 
-" s”Ô†‚ğ•\¦
+" è¡Œç•ªå·ã‚’è¡¨ç¤º
 set number
 
-" ‘Î‰Š‡ŒÊ‚É<‚Æ>‚ÌƒyƒA‚ğ’Ç‰Á
+" å¯¾å¿œæ‹¬å¼§ã«<ã¨>ã®ãƒšã‚¢ã‚’è¿½åŠ 
 set matchpairs& matchpairs+=<:>
 
-" ‘Î‰Š‡ŒÊ‚ğƒnƒCƒ‰ƒCƒg•\¦‚·‚é
+" å¯¾å¿œæ‹¬å¼§ã‚’ãƒã‚¤ãƒ©ã‚¤ãƒˆè¡¨ç¤ºã™ã‚‹
 set showmatch
 
-" ‘Î‰Š‡ŒÊ‚Ì•\¦•b”‚ğ3•b‚É‚·‚é
+" å¯¾å¿œæ‹¬å¼§ã®è¡¨ç¤ºç§’æ•°ã‚’3ç§’ã«ã™ã‚‹
 set matchtime=3
 
-" ƒCƒ“ƒNƒŠƒƒ“ƒ^ƒ‹ƒT[ƒ`‚ğs‚¤
+" ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ã‚¿ãƒ«ã‚µãƒ¼ãƒã‚’è¡Œã†
 set incsearch
 
-" ŒŸõŒ‹‰Ê‚ğƒnƒCƒ‰ƒCƒg•\¦
+" æ¤œç´¢çµæœã‚’ãƒã‚¤ãƒ©ã‚¤ãƒˆè¡¨ç¤º
 :set hlsearch
 
-" ƒ^ƒu•‚Ìİ’è
+" ã‚¿ãƒ–å¹…ã®è¨­å®š
 set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
-" ƒtƒHƒ“ƒgw’è
+" ãƒ•ã‚©ãƒ³ãƒˆæŒ‡å®š
 set guifont=Consolas:h10,Lucida_Console:h10:w5 guifontwide=MS_Gothic:h10
 set ambiwidth=double
 
-" ƒƒjƒ…[‚Ì•¶š‰»‚¯‘Î‰
-source $VIMRUNTIME/delmenu.vim
-set langmenu=ja_jp.utf-8
-source $VIMRUNTIME/menu.vim
+" ãƒ„ãƒ¼ãƒ«ãƒãƒ¼ã‚’å‰Šé™¤
+set guioptions-=T
 
-" ƒEƒBƒ“ƒhƒEˆÊ’u‚ğ•Û‘¶
+" ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’å‰Šé™¤
+set guioptions-=m
+
+" ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ä½ç½®ã‚’ä¿å­˜
 let g:save_window_file = expand('~/.vimwinpos')
 augroup SaveWindow
   autocmd!

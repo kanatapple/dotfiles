@@ -26,6 +26,7 @@ NeoBundle 'vim-startify'
 NeoBundle 'The-NERD-Commenter'
 NeoBundle 'osyo-manga/vim-over'
 NeoBundle 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+NeoBundle 'akira-hamada/friendly-grep.vim'
 
 "ファイル形式別プラグインのロードを有効化
 filetype plugin on
@@ -88,7 +89,7 @@ vmap ,, <Plug>NERDCommenterToggle
 
 " syntastic "{{{
 let g:syntastic_mode_map = { 'mode': 'passive',
-            \ 'active_filetypes': ['javascript'],
+            \ 'active_filetypes': ['javascript', 'css'],
             \ 'passive_filetypes': [] }
 " }}}"
 
@@ -115,5 +116,28 @@ nnoremap <silent> vs :sp<cr><c-w><c-w>:VimShell<CR>
 nnoremap <silent> vsc :VimShellCreate<CR>
 nnoremap <silent> vp :VimShellPop<CR>
 
-" バックアップファイルを作成しない
-:set nobackup
+" コメント自動挿入をやめる
+augroup auto_comment_off
+	autocmd!
+	autocmd BufEnter * setlocal formatoptions-=ro
+augroup END
+
+" Friendly-Grep
+nnoremap <C-g> <ESC>:FriendlyGrep<CR>
+
+let g:friendlygrep_recursively = 1
+" 毎回「再帰検索する？」と聞かれるのがウザい場合はこれを設定すると聞いてこなくなります。 
+" 1 : 常に再帰検索 
+" 0 : 常に非再帰検索
+" (デフォルトはnull、毎回聞いてきます)
+
+let g:friendlygrep_display_result_in = 'quickfix'
+" 検索結果の開き方を指定出来ます。
+" 'tab' : 新規タブに表示
+" 'split' : 現在のウィンドウを横分割して上に表示 (デフォルト)
+" 'vsplit' : 現在のウィンドウを縦分割して左に表示
+" 'quickfix' : 現在のウィンドウにquickfixリストと共に表示
+
+set nobackup                     " バックアップ取らない
+set autoread                     " 他で書き換えられたら自動で読み直す
+set noswapfile                   " スワップファイル作らない
