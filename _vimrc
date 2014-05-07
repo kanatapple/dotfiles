@@ -27,6 +27,17 @@ NeoBundle 'The-NERD-Commenter'
 NeoBundle 'osyo-manga/vim-over'
 NeoBundle 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 NeoBundle 'akira-hamada/friendly-grep.vim'
+NeoBundle 'alpaca-tc/beautify.vim', {
+      \ 'autoload' : {
+      \   'commands' : [
+      \     {
+      \       'name' : 'Beautify',
+      \       'complete' : 'customlist,beautify#complete_options'
+      \     }
+      \ ]
+      \ }}
+NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'myhere/vim-nodejs-complete'
 
 "ファイル形式別プラグインのロードを有効化
 filetype plugin on
@@ -88,8 +99,10 @@ nmap ,, <Plug>NERDCommenterToggle
 vmap ,, <Plug>NERDCommenterToggle
 
 " syntastic "{{{
-let g:syntastic_mode_map = { 'mode': 'passive',
-            \ 'active_filetypes': ['javascript', 'css'],
+" let g:syntastic_typescript_checkers = ['tsc']
+let g:syntastic_mode_map = {
+            \ 'mode': 'active',
+            \ 'active_filetypes': ['javascript', 'css', 'typescript'],
             \ 'passive_filetypes': [] }
 " }}}"
 
@@ -141,3 +154,6 @@ let g:friendlygrep_display_result_in = 'quickfix'
 set nobackup                     " バックアップ取らない
 set autoread                     " 他で書き換えられたら自動で読み直す
 set noswapfile                   " スワップファイル作らない
+set noundofile                   " アンドゥファイルを作らない
+
+autocmd BufRead,BufNewFile *.ts set filetype=typescript
